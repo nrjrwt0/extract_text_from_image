@@ -14,10 +14,12 @@ const uploadImage = async (req, res) => {
       'eng'
     );
 
+    const userId = req.user._id;
     // Save to database
     const image = new Image({
       image: base64Image,
       text: data.data.text,
+      userId,
     });
 
     await image.save();
@@ -34,12 +36,14 @@ const uploadImage = async (req, res) => {
 const getAllOcrs = async (req, res) => {
   try {
     const { page = 1, limit = 12 } = req.query;
+    const userId = req.user._id;
+
     try {
-      const ocrs = await Image.find()
+      const ocrs = await Image.find({ userId })
         .skip((page - 1) * limit)
         .limit(Number(limit));
 
-      const count = await Image.countDocuments();
+      const count = await Image.countDocuments({ userId });
       res.status(200).json({
         ocrs,
         totalPages: Math.ceil(count / limit),
