@@ -1,0 +1,19 @@
+.snackbar{
+  top: 28px;
+  left: 50%;
+  transform: translate(-50%,0);
+  position: fixed;
+  min-width: 600px;
+  padding: 8px 4px;
+  border-radius: 4px;
+  text-align: center;
+  color: white;
+}
+
+.red{
+  background-color: red;
+}
+
+.green{
+  background-color: green;
+}
